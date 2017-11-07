@@ -204,6 +204,7 @@ let checkUp = function (row, column, value) {
   charPrevRow = String.fromCharCode(charRow.charCodeAt() - 1)
   ///////////////////////////////////////////////////////
   strNextKey = charPrevRow + column;
+  console.log(strKey, charPrevRow, strNextKey);
   let adjacentsToUp = 0;
     while ( (charPrevRow >= "A") && (gameboard[strNextKey]['_value'] === gameboard[strKey]['_value']) ) {
       adjacentsToUp = adjacentsToUp + 1;  //////
