@@ -43,14 +43,23 @@ $('.cell').on('click', function () {
     if (player1) {
       $(this).addClass('_black') // changes screen.
       gameplay.updateGameboard (strRow, strColumn, "_black")
-      console.log("rows: " + gameplay.checkRow(strRow, strColumn, "_black"));
-      console.log("columns: "+ gameplay.checkColumn (strRow, strColumn, "_black"));
+      //console.log("rows: " + gameplay.checkRow(strRow, strColumn, "_black"));
+      //console.log("columns: "+ gameplay.checkColumn (strRow, strColumn, "_black"));
+      // console.log("consecutives To Right: "+ gameplay.checkRight (strRow, strColumn, "_black"));
+      // console.log("consecutives To Left: "+ gameplay.checkLeft (strRow, strColumn, "_black"));
+      // console.log("consecutives Down: "+ gameplay.checkDown (strRow, strColumn, "_black"));
+      // console.log("consecutives Up: "+ gameplay.checkUp (strRow, strColumn, "_black"));
+      gameplay.checkNorthEast(strRow, strColumn, "_black");
 
     } else {
       $(this).addClass('_white')
       gameplay.updateGameboard (strRow, strColumn, "_white")
-      console.log("row: " + gameplay.checkRow(strRow, strColumn, "_white"));
-      console.log("columns: "+ gameplay.checkColumn (strRow, strColumn, "_white"));
+      //console.log("row: " + gameplay.checkRow(strRow, strColumn, "_white"));
+      //console.log("columns: "+ gameplay.checkColumn (strRow, strColumn, "_white"));
+      console.log("consecutives To Right: "+ gameplay.checkRight (strRow, strColumn, "_white"));
+      console.log("consecutives To Left: "+ gameplay.checkLeft (strRow, strColumn, "_white"));
+      console.log("consecutives Down: "+ gameplay.checkDown (strRow, strColumn, "_white"));
+      console.log("consecutives Up: "+ gameplay.checkUp (strRow, strColumn, "_white"));
     }
   } else {
     console.log("no");
