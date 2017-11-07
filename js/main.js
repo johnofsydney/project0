@@ -2,9 +2,9 @@ console.log("testing ... main.js is conected");
 
 ///////////////////////////////////////////////////////////
 /// create the game board /////////////////////////////////
-const numRows = 5;
+const numRows = 3;
 const strAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const numColumns = 5;
+const numColumns = 3;
 let rows = [];
 let columns = [];
 gameboard = {};
@@ -33,115 +33,341 @@ for (var i = 0; i < rows.length; i++) {
 ///////////////////////////////////////////////////////////
 // to refer to a square >> (eg) gameboard.A2.row = "A"
 
-let gameplay = {
-  updateGameboard: function (row, column, value) {
+let updateGameboard = function (row, column, value) {
     strKey = row + column;
     gameboard[strKey]['_value'] = value;
-    // console.log(gameboard);
-  },
 
-  checkRight: function (row, column, value) {
-    let adjacents = 0; //initial value.
-    strKey = row + column;
-    numColumn = +column;
-    numNextColumn = numColumn + 1;
-    strNextKey = row + numNextColumn;
+} // gameboard object is now updated.
 
-    if (numColumn < numColumns) { // ie we dont run this section if click in rightest column
-      while ( ((numNextColumn) <= numColumns) && (gameboard[strNextKey]['_value'] === gameboard[strKey]['_value']) ){
-        adjacents = adjacents + 1;
-        numNextColumn = numNextColumn + 1;
-        strNextKey = row + numNextColumn
-      }
+
+
+let checkForWin = function (row, column, value) {
+
+    let a = checkRight(row, column, value)
+    let b = checkLeft (row, column, value)
+
+    let c = checkUp(row, column, value)
+    let d = checkDown (row, column, value)
+
+    let e = checkNorthEast(row, column, value)
+    let f = checkSouthWest (row, column, value)
+
+    let g = checkNorthWest(row, column, value)
+    let h = checkSouthEast (row, column, value)
+
+    if ((a + b + 1) >=3) {console.log(value + " wins")}
+    if ((c + d + 1) >=3) {console.log(value + " wins")}
+    if ((e + f + 1) >=3) {console.log(value + " wins")}
+    if ((g + h + 1) >=3) {console.log(value + " wins")}
+
+    // If (( checkRight(row, column, value) + checkLeft (row, column, value) + 1) >= 3) {
+    //   console.log(" 3 in a row horizontal." + value + " wins.");
+    // }
+    //
+    // If (( checkUp(row, column, value) + checkDown (row, column, value) + 1) >= 3) {
+    //   console.log(" 3 in a row vertical." + value + " wins.");
+    // }
+    //
+    // If (( checkNorthEast(row, column, value) + checkSouthWest (row, column, value) + 1) >= 3) {
+    //   console.log(" 3 in a row diagonal." + value + " wins.");
+    // }
+    //
+    // If (( checkNorthWest(row, column, value) + checkSouthEast (row, column, value) + 1) >= 3) {
+    //   console.log(" 3 in a row diagonal." + value + " wins.");
+    // }
+}
+
+
+
+
+// let checkForWin = function (row, column, value) {
+//
+//   If (( checkRight(row, column, value) + checkLeft (row, column, value) + 1) >= 3) {
+//     console.log(" 3 in a row horizontal." + value + " wins.");
+//   }
+//
+//   If (( checkUp(row, column, value) + checkDown (row, column, value) + 1) >= 3) {
+//     console.log(" 3 in a row vertical." + value + " wins.");
+//   }
+//
+//   If (( checkNorthEast(row, column, value) + checkSouthWest (row, column, value) + 1) >= 3) {
+//     console.log(" 3 in a row diagonal." + value + " wins.");
+//   }
+//
+//   If (( checkNorthWest(row, column, value) + checkSouthEast (row, column, value) + 1) >= 3) {
+//     console.log(" 3 in a row diagonal." + value + " wins.");
+//   }
+//
+//
+// }
+
+
+
+
+let checkRight = function (row, column, value) {
+  ////////////////////////////////////////////////////
+  // These variables are repeated. But as they are ///
+  // manipulated within the functions below I want to reset them before use
+  ////////////////////////////////////////////////////
+  strKey = row + column;
+  numColumn = +column;
+  numNextColumn = numColumn + 1;
+  numPrevColumn = numColumn - 1;
+  charRow = String(row);
+  charNextRow = String.fromCharCode(charRow.charCodeAt() + 1)
+  charLastRow = String.fromCharCode("A".charCodeAt() + numRows - 1)
+  charPrevRow = String.fromCharCode(charRow.charCodeAt() - 1)
+  ///////////////////////////////////////////////////////
+  strNextKey = row + numNextColumn;
+  adjacentsToRight = 0
+  if (numColumn < numColumns) { // ie we dont run this section if click in rightest column
+    while ( ((numNextColumn) <= numColumns) && (gameboard[strNextKey]['_value'] === gameboard[strKey]['_value']) ){
+      adjacentsToRight = adjacentsToRight + 1;   ////////////////////////
+      numNextColumn = numNextColumn + 1;
+      strNextKey = row + numNextColumn
     }
-    return adjacents; // does not include the tile just placed.
-  },
+  }
+  return adjacentsToRight; // does not include the tile just placed.
+}
 
-  checkLeft: function (row, column, value) {
-    let adjacents = 0; //initial value
-    strKey = row + column;
-    numColumn = +column;
-    numPrevColumn = numColumn - 1;
-    strPrevKey = row + numPrevColumn;
 
-    while ( (numPrevColumn > 0) && (gameboard[strPrevKey]['_value'] === gameboard[strKey]['_value']) ) {
-      adjacents = adjacents + 1;
-      numPrevColumn = numPrevColumn - 1;
-      strPrevKey = row + numPrevColumn;
+
+let checkLeft = function (row, column, value) {
+  ////////////////////////////////////////////////////
+  // These variables are repeated. But as they are ///
+  // manipulated within the functions below I want to reset them before use
+  ////////////////////////////////////////////////////
+  strKey = row + column;
+  numColumn = +column;
+  numNextColumn = numColumn + 1;
+  numPrevColumn = numColumn - 1;
+  charRow = String(row);
+  charNextRow = String.fromCharCode(charRow.charCodeAt() + 1)
+  charLastRow = String.fromCharCode("A".charCodeAt() + numRows - 1)
+  charPrevRow = String.fromCharCode(charRow.charCodeAt() - 1)
+  ///////////////////////////////////////////////////////
+
+  strNextKey = row + numPrevColumn;
+  let adjacentsToLeft = 0
+  //debugger;
+  while ( (numPrevColumn > 0) && (gameboard[strNextKey]['_value'] === gameboard[strKey]['_value']) ) {
+    adjacentsToLeft = adjacentsToLeft + 1;   ////////////////////////
+    numPrevColumn = numPrevColumn - 1;
+    strNextKey = row + numPrevColumn;
+  }
+  return adjacentsToLeft;
+}
+    // return adjacents;
+        //console.log("Left" + adjacentsToLeft);
+
+
+let checkDown = function (row, column, value) {
+  ////////////////////////////////////////////////////
+  // These variables are repeated. But as they are ///
+  // manipulated within the functions below I want to reset them before use
+  ////////////////////////////////////////////////////
+  strKey = row + column;
+  numColumn = +column;
+  numNextColumn = numColumn + 1;
+  numPrevColumn = numColumn - 1;
+  charRow = String(row);
+  charNextRow = String.fromCharCode(charRow.charCodeAt() + 1)
+  charLastRow = String.fromCharCode("A".charCodeAt() + numRows - 1)
+  charPrevRow = String.fromCharCode(charRow.charCodeAt() - 1)
+  ///////////////////////////////////////////////////////
+
+  strNextKey = charNextRow + column;
+  let adjacentsToDown = 0
+  if (charRow < charLastRow) { // doesnt run if we currently in last row
+    while ( (charNextRow <= charLastRow) && (gameboard[strNextKey]['_value'] === gameboard[strKey]['_value']) ) {
+      adjacentsToDown = adjacentsToDown + 1;
+      charNextRow = String.fromCharCode(charNextRow.charCodeAt() + 1)
+      strNextKey = charNextRow + column
+      //console.log("(in checkColumn )strNextKewy: strNextKey");
     }
-    return adjacents;
-  }, // end of checkRow
+  }
+  return adjacentsToDown;
+}
 
-  checkDown: function (row, column, value) {
-    let adjacents = 0;
-    strKey = row + column;
-    charRow = String(row);
-    charNextRow = String.fromCharCode(charRow.charCodeAt() + 1)
-    charLastRow = String.fromCharCode("A".charCodeAt() + numRows - 1)
-    strNextKey = charNextRow + column;
-
-    if (charRow < charLastRow) { // doesnt run if we currently in last row
-      while ( (charNextRow <= charLastRow) && (gameboard[strNextKey]['_value'] === gameboard[strKey]['_value']) ) {
-        adjacents = adjacents + 1;
-        charNextRow = String.fromCharCode(charNextRow.charCodeAt() + 1)
-        strNextKey = charNextRow + column
-        //console.log("(in checkColumn )strNextKewy: strNextKey");
-      }
+let checkUp = function (row, column, value) {
+  ////////////////////////////////////////////////////
+  // These variables are repeated. But as they are ///
+  // manipulated within the functions below I want to reset them before use
+  ////////////////////////////////////////////////////
+  strKey = row + column;
+  numColumn = +column;
+  numNextColumn = numColumn + 1;
+  numPrevColumn = numColumn - 1;
+  charRow = String(row);
+  charNextRow = String.fromCharCode(charRow.charCodeAt() + 1)
+  charLastRow = String.fromCharCode("A".charCodeAt() + numRows - 1)
+  charPrevRow = String.fromCharCode(charRow.charCodeAt() - 1)
+  ///////////////////////////////////////////////////////
+  strNextKey = charPrevRow + column;
+  let adjacentsToUp = 0;
+    while ( (charPrevRow >= "A") && (gameboard[strNextKey]['_value'] === gameboard[strKey]['_value']) ) {
+      adjacentsToUp = adjacentsToUp + 1;  //////
+      charPrevRow = String.fromCharCode(charPrevRow.charCodeAt() - 1)
+      strNextKey = charPrevRow + column
+      //console.log("(in checkColumn )strNextKewy: " + strPrevKey);
     }
-
-    return adjacents
-  }, // ewnd of checkDown
-
-
-  checkUp: function (row, column, value) {
-    let adjacents = 0;
-    strKey = row + column;
-    charRow = String(row);
-    charPrevRow = String.fromCharCode(charRow.charCodeAt() - 1)
-    strPrevKey = charPrevRow + column;
-
-      while ( (charPrevRow >= "A") && (gameboard[strPrevKey]['_value'] === gameboard[strKey]['_value']) ) {
-        adjacents = adjacents + 1;
-        charPrevRow = String.fromCharCode(charPrevRow.charCodeAt() - 1)
-        strPrevKey = charPrevRow + column
-        //console.log("(in checkColumn )strNextKewy: " + strPrevKey);
-      }
-
-    return adjacents
-  }, // ewnd of checkUp
+    return adjacentsToUp
+  }
 
 
-  checkNorthEast: function (row, column, value) { // checking to UP and RIGHT
-    let adjacents = 0;
-    strKey = row + column;
-    charRow = String(row);
-    charPrevRow = String.fromCharCode(charRow.charCodeAt() - 1)
-    numColumn = +column;
-    numNextColumn = numColumn + 1;
-    strNextKey = charPrevRow + numNextColumn
 
-    if ( (charPrevRow >= "A") && ( numNextColumn <= numColumns)) { //( (charPrevRow >= "A") && ( numNextColumn < columns))
-    console.log("into if");
-      console.log(strKey, charRow, numColumn, strNextKey, gameboard[strNextKey]['_value']);
-      while ( (charPrevRow >= "A") && ( numNextColumn <= numColumns) &  (gameboard[strNextKey]['_value'] === gameboard[strKey]['_value']) ) {
-        console.log("while...");
-        adjacents = adjacents + 1;
-        charPrevRow = String.fromCharCode(charPrevRow.charCodeAt() - 1)
-        numNextColumn = numNextColumn + 1;
-        strNextKey = charPrevRow + numNextColumn
-      }
+let checkNorthEast = function (row, column, value) { // checking to UP and RIGHT
+  ////////////////////////////////////////////////////
+  // These variables are repeated. But as they are ///
+  // manipulated within the functions below I want to reset them before use
+  ////////////////////////////////////////////////////
+  strKey = row + column;
+  numColumn = +column;
+  numNextColumn = numColumn + 1;
+  numPrevColumn = numColumn - 1;
+  charRow = String(row);
+  charNextRow = String.fromCharCode(charRow.charCodeAt() + 1)
+  charLastRow = String.fromCharCode("A".charCodeAt() + numRows - 1)
+  charPrevRow = String.fromCharCode(charRow.charCodeAt() - 1)
+  ///////////////////////////////////////////////////////
+  strNextKey = charPrevRow + numNextColumn
+  let adjacentsToNE = 0
+
+  if ( (charPrevRow >= "A") && ( numNextColumn <= numColumns)) { //( (charPrevRow >= "A") && ( numNextColumn < columns))
+  //debugger;
+
+    //console.log(strKey, charRow, numColumn, strNextKey, gameboard[strNextKey]['_value']);
+    while ( (charPrevRow >= "A") && ( numNextColumn <= numColumns) &&  (gameboard[strNextKey]['_value'] === gameboard[strKey]['_value']) ) {
+      adjacentsToNE = adjacentsToNE + 1;
+      charPrevRow = String.fromCharCode(charPrevRow.charCodeAt() - 1)
+      numNextColumn = numNextColumn + 1;
+      strNextKey = charPrevRow + numNextColumn
+
     }
-console.log("NE " + adjacents);
+  }
+  return adjacentsToNE;
+}
 
 
 
+let checkSouthEast = function (row, column, value) { // checking to DOWN and RIGHT
+  ////////////////////////////////////////////////////
+  // These variables are repeated. But as they are ///
+  // manipulated within the functions below I want to reset them before use
+  ////////////////////////////////////////////////////
+  strKey = row + column;
+  numColumn = +column;
+  numNextColumn = numColumn + 1;
+  numPrevColumn = numColumn - 1;
+  charRow = String(row);
+  charNextRow = String.fromCharCode(charRow.charCodeAt() + 1)
+  charLastRow = String.fromCharCode("A".charCodeAt() + numRows - 1)
+  charPrevRow = String.fromCharCode(charRow.charCodeAt() - 1)
+  ///////////////////////////////////////////////////////
+  strNextKey = charNextRow + numNextColumn
+  let adjacentsToSE = 0;
+  //if ( (charPrevRow >= "A") && ( numNextColumn <= numColumns)) { //( (charPrevRow >= "A") && ( numNextColumn < columns))
+  //debugger;
+
+    //console.log(strKey, charRow, numColumn, strNextKey, gameboard[strNextKey]['_value']);
+    while ( (charNextRow <= charLastRow) && ( numNextColumn <= numColumns) &&  (gameboard[strNextKey]['_value'] === gameboard[strKey]['_value']) ) {
+      adjacentsToSE = adjacentsToSE + 1;
+      charNextRow = String.fromCharCode(charNextRow.charCodeAt() + 1)
+      numNextColumn = numNextColumn + 1;
+      strNextKey = charNextRow + numNextColumn
+
+    }
+      return adjacentsToSE;
   }
 
 
 
 
-}
 
+let checkSouthWest = function (row, column, value) { // checking to DOWN and LEFT
+  ////////////////////////////////////////////////////
+  // These variables are repeated. But as they are ///
+  // manipulated within the functions below I want to reset them before use
+  ////////////////////////////////////////////////////
+  strKey = row + column;
+  numColumn = +column;
+  numNextColumn = numColumn + 1;
+  numPrevColumn = numColumn - 1;
+  charRow = String(row);
+  charNextRow = String.fromCharCode(charRow.charCodeAt() + 1)
+  charLastRow = String.fromCharCode("A".charCodeAt() + numRows - 1)
+  charPrevRow = String.fromCharCode(charRow.charCodeAt() - 1)
+  ///////////////////////////////////////////////////////
+  strNextKey = charNextRow + numPrevColumn
+  let adjacentsToSW = 0;
+  //if ( (charPrevRow >= "A") && ( numNextColumn <= numColumns)) { //( (charPrevRow >= "A") && ( numNextColumn < columns))
+  //debugger;
+
+    //console.log(strKey, charRow, numColumn, strNextKey, gameboard[strNextKey]['_value']);
+    while ( (charNextRow <= charLastRow) && ( numPrevColumn > 0) &&  (gameboard[strNextKey]['_value'] === gameboard[strKey]['_value']) ) {
+      adjacentsToSW = adjacentsToSW + 1;
+      charNextRow = String.fromCharCode(charNextRow.charCodeAt() + 1)
+      numPrevColumn = numPrevColumn - 1;
+      strNextKey = charNextRow + numPrevColumn
+
+    }
+    return adjacentsToSW;
+  }
+
+
+
+let checkNorthWest = function (row, column, value) { // checking to UP and LEFT
+  ////////////////////////////////////////////////////
+  // These variables are repeated. But as they are ///
+  // manipulated within the functions below I want to reset them before use
+  ////////////////////////////////////////////////////
+  strKey = row + column;
+  numColumn = +column;
+  numNextColumn = numColumn + 1;
+  numPrevColumn = numColumn - 1;
+  charRow = String(row);
+  charNextRow = String.fromCharCode(charRow.charCodeAt() + 1)
+  charLastRow = String.fromCharCode("A".charCodeAt() + numRows - 1)
+  charPrevRow = String.fromCharCode(charRow.charCodeAt() - 1)
+  ///////////////////////////////////////////////////////
+  strNextKey = charPrevRow + numPrevColumn
+  let adjacentsToNW = 0
+  //if ( (charPrevRow >= "A") && ( numNextColumn <= numColumns)) { //( (charPrevRow >= "A") && ( numNextColumn < columns))
+  //debugger;
+
+    //console.log(strKey, charRow, numColumn, strNextKey, gameboard[strNextKey]['_value']);
+    while ( (charPrevRow >= "A") && ( numPrevColumn > 0) &&  (gameboard[strNextKey]['_value'] === gameboard[strKey]['_value']) ) {
+      adjacentsToNW = adjacentsToNW + 1;
+      charPrevRow = String.fromCharCode(charPrevRow.charCodeAt() - 1)
+      numPrevColumn = numPrevColumn - 1;
+      strNextKey = charPrevRow + numPrevColumn
+
+    }
+    return adjacentsToNW;
+  }
+
+
+//
+// let checkForWin = function (row, column, value) {
+//
+//   If (( checkRight(row, column, value) + checkLeft (row, column, value) + 1) >= 3) {
+//     console.log(" 3 in a row horizontal." + value + " wins.");
+//   }
+//
+//   If (( checkUp(row, column, value) + checkDown (row, column, value) + 1) >= 3) {
+//     console.log(" 3 in a row vertical." + value + " wins.");
+//   }
+//
+//   If (( checkNorthEast(row, column, value) + checkSouthWest (row, column, value) + 1) >= 3) {
+//     console.log(" 3 in a row diagonal." + value + " wins.");
+//   }
+//
+//   If (( checkNorthWest(row, column, value) + checkSouthEast (row, column, value) + 1) >= 3) {
+//     console.log(" 3 in a row diagonal." + value + " wins.");
+//   }
+//
+//
+// }
 
 // checkColumn: function (row, column, value) {
 //   let columnLength = 1;

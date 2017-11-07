@@ -1,4 +1,29 @@
 
+let render = function () {
+  strHTML = ""
+      for (var i = 0; i < rows.length; i++) {
+        for (var j = 0; j < columns.length; j++) {
+          str = rows[i] + columns[j];
+
+          strRow = gameboard[str]._row;
+          strColumn = gameboard[str]._column;
+          strID = gameboard[str]._id;
+          strValue = gameboard[str]._value;
+
+          strHTML = strHTML + `<div class=\"cell ${strRow} ${strColumn} ${strValue}\" id=\"${strID}\"></div>`
+
+        }
+      }
+  $('#gamearea').html(strHTML).show()
+}
+
+
+
+
+
+
+
+///////////////////////////////////////////
 $( document ).ready(function() {
     console.log( "screenstuff.js ready! OK use DOM" );
 
@@ -6,73 +31,99 @@ $( document ).ready(function() {
 
 
 // take the gameboard object and create a DOM version of HTML to display it...
-strHTML = ""
-    for (var i = 0; i < rows.length; i++) {
-      for (var j = 0; j < columns.length; j++) {
-        str = rows[i] + columns[j];
 
-        strRow = gameboard[str]._row;
-        strColumn = gameboard[str]._column;
-        strID = gameboard[str]._id;
-        strValue = gameboard[str]._value;
 
-        strHTML = strHTML + `<div class=\"cell ${strRow} ${strColumn} ${strValue}\" id=\"${strID}\"></div>`
+render ();
 
-        //$('#gamearea').append(strHTML);  // might need to come back to this to replace rather than aopoend?? - this might need to be a redraw every rtime kind of thing // apend is good to run at the end of each iteration. but to send the whole thing,
-        // best to append to the string before sending to DOM.
-        // this from planets ... $(stringID).html(stringDisplay).show();
 
-      }
-    }
-$('#gamearea').html(strHTML).show()
 
-// now for player interaction
 $('.cell').on('click', function () {
-  //x = this.innerHTML()
-  // x = this.innerHTML ---- gives me the CONTENTS shown inthe box (testcxell ...)
-  // x = $(this).html()  ---- gives me the CONTENTS shown inthe box (testcxell ...)
-  // x = $(this).html
-  // JOEL recomends using .data to add / remove info from tags. get more info and try
   strClass = $(this).attr('class')
   strID = $(this).attr('id')
   strRow = strID.slice(1,2)
   strColumn = strID.slice(2,3)
 
-  if (strClass.search("null") > -1) {
-    $(this).removeClass('_null')
-    if (player1) {
-      $(this).addClass('_black') // changes screen.
-      gameplay.updateGameboard (strRow, strColumn, "_black")
-      //console.log("rows: " + gameplay.checkRow(strRow, strColumn, "_black"));
-      //console.log("columns: "+ gameplay.checkColumn (strRow, strColumn, "_black"));
-      // console.log("consecutives To Right: "+ gameplay.checkRight (strRow, strColumn, "_black"));
-      // console.log("consecutives To Left: "+ gameplay.checkLeft (strRow, strColumn, "_black"));
-      // console.log("consecutives Down: "+ gameplay.checkDown (strRow, strColumn, "_black"));
-      // console.log("consecutives Up: "+ gameplay.checkUp (strRow, strColumn, "_black"));
-      gameplay.checkNorthEast(strRow, strColumn, "_black");
 
+    if (strClass.search("null") > -1) {
+      $(this).removeClass('_null')
+      if (player1) {
+        $(this).addClass('_black') // changes screen.
+        updateGameboard (strRow, strColumn, "_black")
+        //render ();
+
+        checkForWin(strRow, strColumn, "_black")
+
+      } else {
+        $(this).addClass('_white')
+        updateGameboard (strRow, strColumn, "_white")
+        //render ();
+
+        checkForWin(strRow, strColumn, "_white")
+
+        // console.log("white to right :" + checkRight(strRow, strColumn, "_white"));
+        // console.log("white to left :" + checkLeft(strRow, strColumn, "_white"));
+        // console.log("white to up :" + checkUp(strRow, strColumn, "_white"));
+        // console.log("white to down :" + checkDown(strRow, strColumn, "_white"));
+        // console.log("white to NE :" + checkNorthEast(strRow, strColumn, "_white"));
+        // console.log("white to SE :" + checkSouthEast(strRow, strColumn, "_white"));
+        // console.log("white to SW :" + checkSouthWest(strRow, strColumn, "_white"));
+        // console.log("white to  NW :" + checkNorthWest(strRow, strColumn, "_white"));
+
+      }
     } else {
-      $(this).addClass('_white')
-      gameplay.updateGameboard (strRow, strColumn, "_white")
-      //console.log("row: " + gameplay.checkRow(strRow, strColumn, "_white"));
-      //console.log("columns: "+ gameplay.checkColumn (strRow, strColumn, "_white"));
-      console.log("consecutives To Right: "+ gameplay.checkRight (strRow, strColumn, "_white"));
-      console.log("consecutives To Left: "+ gameplay.checkLeft (strRow, strColumn, "_white"));
-      console.log("consecutives Down: "+ gameplay.checkDown (strRow, strColumn, "_white"));
-      console.log("consecutives Up: "+ gameplay.checkUp (strRow, strColumn, "_white"));
+      console.log("no");
     }
-  } else {
-    console.log("no");
-  }
+
+    player1 = !player1
+    console.log(player1);
+    //render ();
+    //debugger;
 
 
 
 
 
-  player1 = !player1
 
 
-}) // nd of on click
+
+})
+
+
+
+
+// // now for player interaction
+// $('.cell').on('click', function () {
+//   // JOEL recomends using .data to add / remove info from tags. get more info and try
+//   strClass = $(this).attr('class')
+//   strID = $(this).attr('id')
+//   strRow = strID.slice(1,2)
+//   strColumn = strID.slice(2,3)
+//
+//   if (strClass.search("null") > -1) {
+//     $(this).removeClass('_null')
+//     if (player1) {
+//       $(this).addClass('_black') // changes screen.
+//       updateGameboard (strRow, strColumn, "_black")
+//
+//     } else {
+//       $(this).addClass('_white')
+//       updateGameboard (strRow, strColumn, "_white")
+//
+//     }
+//   } else {
+//     console.log("no");
+//   }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
