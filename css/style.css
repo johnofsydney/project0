@@ -32,29 +32,59 @@
 }
 
 
+._F {
+  top: 600px;
+  height: 100px;
+}
+
+._G {
+  top: 700px;
+  height: 100px;
+}
+
+._H {
+  top: 800px;
+  height: 100px;
+}
+
 /*columns*/
 ._1 {
-  left: 300px;
+  left: 200px;
   width: 100px;
 }
 
 ._2 {
-  left: 400px;
+  left: 300px;
   width: 100px;
 }
 
 ._3 {
-  left: 500px;
+  left: 400px;
   width: 100px;
 }
 
 ._4 {
-  left: 600px;
+  left: 500px;
   width: 100px;
 }
 
 ._5 {
+  left: 600px;
+  width: 100px;
+}
+
+._6 {
   left: 700px;
+  width: 100px;
+}
+
+._7 {
+  left: 800px;
+  width: 100px;
+}
+
+._8 {
+  left: 900px;
   width: 100px;
 }
 
