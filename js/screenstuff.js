@@ -1,19 +1,21 @@
 
 let render = function () {
-  strHTML = ""
-      for (var i = 0; i < rows.length; i++) {
-        for (var j = 0; j < columns.length; j++) {
-          str = rows[i] + columns[j];
+  let strHTML = ""
+      for (let i = 0; i < rows.length; i++) {
+        for (let j = 0; j < columns.length; j++) {
+          let str = rows[i] + columns[j];
 
-          strRow = gameboard[str]._row;
-          strColumn = gameboard[str]._column;
-          strID = gameboard[str]._id;
-          strValue = gameboard[str]._value;
+          let strRow = gameboard[str]._row;
+          let strColumn = gameboard[str]._column;
+          let strID = gameboard[str]._id;
+          let strValue = gameboard[str]._value;
 
           strHTML = strHTML + `<div class=\"cell ${strRow} ${strColumn} ${strValue}\" id=\"${strID}\"></div>`
 
         }
       }
+      console.log(`strHTML = ${strHTML}`);
+
   $('#gamearea').html(strHTML).show()
 }
 
@@ -33,126 +35,42 @@ $( document ).ready(function() {
 // take the gameboard object and create a DOM version of HTML to display it...
 
 
-render ();
+  render ();
 
 
+  // jquery event delegation
+  $('#gamearea').on('click', '.cell', function () {
+    console.log("click");
+    let strClass = $(this).attr('class')
+    let strID = $(this).attr('id')
+    let strRow = strID.slice(1,2)
+    let strColumn = strID.slice(2,3)
 
-$('.cell').on('click', function () {
-  strClass = $(this).attr('class')
-  strID = $(this).attr('id')
-  strRow = strID.slice(1,2)
-  strColumn = strID.slice(2,3)
+      if (strClass.search("null") > -1) {
 
+        //$(this).removeClass('_null')
+        if (player1) {
+          //$(this).addClass('_black') // changes screen.
+          updateGameboard (strRow, strColumn, "_black")
+          render ();
+          checkForWin(strRow, strColumn, "_black")
 
-    if (strClass.search("null") > -1) {
-      $(this).removeClass('_null')
-      if (player1) {
-        $(this).addClass('_black') // changes screen.
-        updateGameboard (strRow, strColumn, "_black")
-        //render ();
+        } else {
+          //$(this).addClass('_white')
+          updateGameboard (strRow, strColumn, "_white")
+          render ();
+          checkForWin(strRow, strColumn, "_white")
 
-        checkForWin(strRow, strColumn, "_black")
-
+        }
       } else {
-        $(this).addClass('_white')
-        updateGameboard (strRow, strColumn, "_white")
-        //render ();
-
-        checkForWin(strRow, strColumn, "_white")
-
-        // console.log("white to right :" + checkRight(strRow, strColumn, "_white"));
-        // console.log("white to left :" + checkLeft(strRow, strColumn, "_white"));
-        // console.log("white to up :" + checkUp(strRow, strColumn, "_white"));
-        // console.log("white to down :" + checkDown(strRow, strColumn, "_white"));
-        // console.log("white to NE :" + checkNorthEast(strRow, strColumn, "_white"));
-        // console.log("white to SE :" + checkSouthEast(strRow, strColumn, "_white"));
-        // console.log("white to SW :" + checkSouthWest(strRow, strColumn, "_white"));
-        // console.log("white to  NW :" + checkNorthWest(strRow, strColumn, "_white"));
-
+        console.log("Cant go in occupied square");
       }
-    } else {
-      console.log("no");
-    }
 
-    player1 = !player1
-    console.log(player1);
-    //render ();
-    //debugger;
+      player1 = !player1
+      console.log(player1);
 
 
-
-
-
-
-
-
-})
-
-
-
-
-// // now for player interaction
-// $('.cell').on('click', function () {
-//   // JOEL recomends using .data to add / remove info from tags. get more info and try
-//   strClass = $(this).attr('class')
-//   strID = $(this).attr('id')
-//   strRow = strID.slice(1,2)
-//   strColumn = strID.slice(2,3)
-//
-//   if (strClass.search("null") > -1) {
-//     $(this).removeClass('_null')
-//     if (player1) {
-//       $(this).addClass('_black') // changes screen.
-//       updateGameboard (strRow, strColumn, "_black")
-//
-//     } else {
-//       $(this).addClass('_white')
-//       updateGameboard (strRow, strColumn, "_white")
-//
-//     }
-//   } else {
-//     console.log("no");
-//   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  })
 
 
 

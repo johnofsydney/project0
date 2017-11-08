@@ -1,24 +1,41 @@
 console.log("testing ... main.js is conected");
 
 ///////////////////////////////////////////////////////////
+
+let strKey = ""
+let numColumn = 0;
+let numNextColumn = 0;
+let numPrevColumn = 0;
+let charRow = ""
+let charNextRow = ""
+let charLastRow = ""
+let charPrevRow = ""
+let strNextKey = "";
+
+
+
+
+
+
+
 /// create the game board /////////////////////////////////
-const numRows = 3;
+const numRows = 4;
 const strAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const numColumns = 3;
+const numColumns = 4;
 let rows = [];
 let columns = [];
 gameboard = {};
 
-for (var i = 1; i <= numColumns; i++) {
+for (let i = 1; i <= numColumns; i++) {
   columns.push(i)
 }
-for (var j = 1; j <= numRows; j++) {
+for (let j = 1; j <= numRows; j++) {
   char = strAlphabet.slice(j-1,j)
   rows.push(char)
 }
 
-for (var i = 0; i < rows.length; i++) {
-  for (var j = 0; j < columns.length; j++) {
+for (let i = 0; i < rows.length; i++) {
+  for (let j = 0; j < columns.length; j++) {
     let char = rows[i];
     let num = columns[j].toString();
 
@@ -119,6 +136,7 @@ let checkRight = function (row, column, value) {
   charPrevRow = String.fromCharCode(charRow.charCodeAt() - 1)
   ///////////////////////////////////////////////////////
   strNextKey = row + numNextColumn;
+  console.log("in check Right" + strKey, charPrevRow, strNextKey);
   adjacentsToRight = 0
   if (numColumn < numColumns) { // ie we dont run this section if click in rightest column
     while ( ((numNextColumn) <= numColumns) && (gameboard[strNextKey]['_value'] === gameboard[strKey]['_value']) ){
@@ -177,6 +195,7 @@ let checkDown = function (row, column, value) {
   ///////////////////////////////////////////////////////
 
   strNextKey = charNextRow + column;
+  console.log(strKey, charPrevRow, strNextKey);
   let adjacentsToDown = 0
   if (charRow < charLastRow) { // doesnt run if we currently in last row
     while ( (charNextRow <= charLastRow) && (gameboard[strNextKey]['_value'] === gameboard[strKey]['_value']) ) {
@@ -186,8 +205,12 @@ let checkDown = function (row, column, value) {
       //console.log("(in checkColumn )strNextKewy: strNextKey");
     }
   }
+
   return adjacentsToDown;
+
 }
+
+
 
 let checkUp = function (row, column, value) {
   ////////////////////////////////////////////////////
@@ -199,12 +222,14 @@ let checkUp = function (row, column, value) {
   numNextColumn = numColumn + 1;
   numPrevColumn = numColumn - 1;
   charRow = String(row);
+  console.log(`charRow = ${charRow}`);
   charNextRow = String.fromCharCode(charRow.charCodeAt() + 1)
   charLastRow = String.fromCharCode("A".charCodeAt() + numRows - 1)
   charPrevRow = String.fromCharCode(charRow.charCodeAt() - 1)
   ///////////////////////////////////////////////////////
   strNextKey = charPrevRow + column;
   console.log(strKey, charPrevRow, strNextKey);
+  // debugger;
   let adjacentsToUp = 0;
     while ( (charPrevRow >= "A") && (gameboard[strNextKey]['_value'] === gameboard[strKey]['_value']) ) {
       adjacentsToUp = adjacentsToUp + 1;  //////
