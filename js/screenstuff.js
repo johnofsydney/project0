@@ -52,6 +52,7 @@ $(document).ready(function() {
       }
     } else {
       console.log("Cant go in occupied square");
+      player1 = !player1
     }
 
     player1 = !player1
