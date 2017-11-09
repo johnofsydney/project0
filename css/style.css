@@ -6,6 +6,10 @@
 
 /*rows*/
 
+body {
+  background-color: grey;
+}
+
 ._A {
   top: 100px;
   height: 100px;
@@ -47,6 +51,19 @@
   height: 100px;
 }
 
+
+._I {
+  top: 900px;
+  height: 100px;
+}
+
+._J {
+  top: 1000px;
+  height: 100px;
+}
+
+
+
 /*columns*/
 ._1 {
   left: 200px;
@@ -87,6 +104,16 @@
   left: 900px;
   width: 100px;
 }
+._9 {
+  left: 1000px;
+  width: 100px;
+}
+
+._10 {
+  left: 1100px;
+  width: 100px;
+}
+
 
 
 /*values*/

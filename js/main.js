@@ -205,15 +205,23 @@ let checkForWin = function(row, column, value) {
       if (value === "_black") {
         blackWins = blackWins + 1;
         updateScore("black", blackWins);
-        window.alert("Black wins. Black wins: " + blackWins + " White wins: " + whiteWins);
-        createGameBoard(numRows, numColumns);
-        console.log(numRows, numColumns);
+        //window.alert("Black wins. Black wins: " + blackWins + " White wins: " + whiteWins);
+        $('#announcement').html('Black Wins').show().fadeOut(5000, function() {
+          createGameBoard(numRows, numColumns);
+          console.log(numRows, numColumns);
+          render();
+        })
+////////////////////////////////////////////////
+
+        //
       } else {
         whiteWins = whiteWins + 1;
         updateScore("white", whiteWins);
-        window.alert("White wins. Black wins: " + blackWins + " White wins: " + whiteWins);
-        createGameBoard(numRows, numColumns);
-        console.log(numRows, numColumns);
+        $('#announcement').html('White Wins').show().fadeOut(5000, function() {
+          createGameBoard(numRows, numColumns);
+          console.log(numRows, numColumns);
+          render();
+        })
       }
       console.log(`white wins: ${whiteWins}, black wins: ${blackWins}`);
     }
@@ -227,14 +235,19 @@ let checkForWin = function(row, column, value) {
       if (value === "_black") {
         blackWins = blackWins + 1;
         updateScore("black", blackWins);
-        console.log("change this alert business. it is nasty");
-        window.alert("Black wins. Black wins: " + blackWins + " White wins: " + whiteWins);
-        createGameBoard(numRows, numColumns);
+        $('#announcement').html('Black Wins').show().fadeOut(5000, function() {
+          createGameBoard(numRows, numColumns);
+          console.log(numRows, numColumns);
+          render();
+        })
       } else {
         whiteWins = whiteWins + 1;
         updateScore("white", whiteWins);
-        window.alert("White wins. Black wins: " + blackWins + " White wins: " + whiteWins);
-        createGameBoard(numRows, numColumns);
+        $('#announcement').html('White Wins').show().fadeOut(5000, function() {
+          createGameBoard(numRows, numColumns);
+          console.log(numRows, numColumns);
+          render();
+        })
       }
     }
   }
