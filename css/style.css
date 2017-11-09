@@ -8,6 +8,12 @@
 
 }
 
+.screeninfo {
+  border: 2px solid red;
+  width: 200px;
+  border-radius: 20px;
+}
+
 h1, h2, h3 {
   padding: 1px 10px
 }
