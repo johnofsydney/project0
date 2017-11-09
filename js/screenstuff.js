@@ -45,10 +45,12 @@ $(document).ready(function() {
       if (player1) {
         updateGameboard(strRow, strColumn, "_black")
         render();
+        $('#player').html('White Turn').show()
 
       } else {
         updateGameboard(strRow, strColumn, "_white")
         render();
+        $('#player').html('Black Turn').show()
       }
     } else {
       console.log("Cant go in occupied square");
