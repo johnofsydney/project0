@@ -2,12 +2,27 @@
   position: absolute;
   display: inline-block;
   border: 2px solid yellow;
+
 }
 
+h1, h2, h3 {
+  padding: 1px 10px
+}
+
+button {
+  margin: 10px;
+  padding: 10px;
+}
+
+input {
+  padding: 5px;
+  margin: 1px 30px 1px 10px;
+}
 /*rows*/
 
 body {
-  background-color: grey;
+  background-color: #aaa9e6;
+  font-family: 'Permanent Marker', cursive;
 }
 
 ._A {
@@ -66,51 +81,51 @@ body {
 
 /*columns*/
 ._1 {
-  left: 200px;
-  width: 100px;
-}
-
-._2 {
-  left: 300px;
-  width: 100px;
-}
-
-._3 {
   left: 400px;
   width: 100px;
 }
 
-._4 {
+._2 {
   left: 500px;
   width: 100px;
 }
 
-._5 {
+._3 {
   left: 600px;
   width: 100px;
 }
 
-._6 {
+._4 {
   left: 700px;
   width: 100px;
 }
 
-._7 {
+._5 {
   left: 800px;
   width: 100px;
 }
 
-._8 {
+._6 {
   left: 900px;
   width: 100px;
 }
-._9 {
+
+._7 {
   left: 1000px;
   width: 100px;
 }
 
-._10 {
+._8 {
   left: 1100px;
+  width: 100px;
+}
+._9 {
+  left: 1200px;
+  width: 100px;
+}
+
+._10 {
+  left: 1300px;
   width: 100px;
 }
 

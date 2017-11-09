@@ -187,6 +187,7 @@ let checkForFlips = function(row, column, value) {
 let checkForWin = function(row, column, value) {
   // hope its all here - might have lost some stuff.
 
+
   let a = checkRight(row, column, value)
   let b = checkLeft(row, column, value)
 
@@ -206,7 +207,7 @@ let checkForWin = function(row, column, value) {
         blackWins = blackWins + 1;
         updateScore("black", blackWins);
         //window.alert("Black wins. Black wins: " + blackWins + " White wins: " + whiteWins);
-        $('#announcement').html('Black Wins').show().fadeOut(5000, function() {
+        $('#announcement').html("BLACK WINS").show().fadeOut(5000, function() {
           createGameBoard(numRows, numColumns);
           console.log(numRows, numColumns);
           render();
@@ -217,7 +218,7 @@ let checkForWin = function(row, column, value) {
       } else {
         whiteWins = whiteWins + 1;
         updateScore("white", whiteWins);
-        $('#announcement').html('White Wins').show().fadeOut(5000, function() {
+        $('#announcement').html("WHITE WINS").show().fadeOut(5000, function() {
           createGameBoard(numRows, numColumns);
           console.log(numRows, numColumns);
           render();
@@ -234,8 +235,7 @@ let checkForWin = function(row, column, value) {
     if (((a + b + 1) >= 4) || ((c + d + 1) >= 4) || ((e + f + 1) >= 4) || ((g + h + 1) >= 4)) {
       if (value === "_black") {
         blackWins = blackWins + 1;
-        updateScore("black", blackWins);
-        $('#announcement').html('Black Wins').show().fadeOut(5000, function() {
+        $('#announcement').html("BLACK WINS").show().fadeOut(5000, function() {
           createGameBoard(numRows, numColumns);
           console.log(numRows, numColumns);
           render();
@@ -243,7 +243,7 @@ let checkForWin = function(row, column, value) {
       } else {
         whiteWins = whiteWins + 1;
         updateScore("white", whiteWins);
-        $('#announcement').html('White Wins').show().fadeOut(5000, function() {
+        $('#announcement').html("WHITE WINS").show().fadeOut(5000, function() {
           createGameBoard(numRows, numColumns);
           console.log(numRows, numColumns);
           render();
