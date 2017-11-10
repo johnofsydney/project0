@@ -102,6 +102,7 @@ let updateGameboard = function(row, column, value) {
     gameboard[strKey]['_value'] = value; // just place the pice where the player clicked
     console.log("about to send to checkForFlips with row = " + row + " column = " + column + " value = " + value);
     checkForFlips(row, column, value)
+    checkForWin(row, column, value)
 
   } else { // Connect 4
     // Connect 4 // Connect 4 // Connect 4 // Connect 4 // Connect 4 // Connect 4
@@ -270,6 +271,12 @@ let checkForWin = function(row, column, value) {
   } else if ((numRows * numColumns) > 63) { //Othello / reversi
 
     console.log("...coming soon...");
+    console.log(countBlankCells() + "turns remaining");
+    $('#announcement').html(countBlankCells() + " turns remaining").show()
+
+
+
+
 
   } else { // Connect 4 // Connect 4 // Connect 4 // Connect 4 // Connect 4 // Connect 4
     if (((a + b + 1) >= 4) || ((c + d + 1) >= 4) || ((e + f + 1) >= 4) || ((g + h + 1) >= 4)) {
@@ -290,6 +297,33 @@ let checkForWin = function(row, column, value) {
         })
       }
     }
+
+////
+
+else {
+  console.log("no one has won yet");
+  console.log(countBlankCells());
+
+  if (countBlankCells() === 0) {
+    console.log("draw");
+
+    $('#announcement').html("DRAW").show().fadeOut(5000, function() {
+      createGameBoard(numRows, numColumns);
+      console.log(numRows, numColumns);
+      render();
+    })
+
+
+
+
+  }
+
+}
+
+////
+
+
+
   }
 }
 
