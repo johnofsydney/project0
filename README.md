@@ -5,9 +5,9 @@ Week long project to implement Tic Tac Toe, using HTML, CSS and Javascript. As t
 ## To Play the game(s)
 
 Enter the required number of rows and columns and press he start button.
-### if total number of squares <= 16, the game will be Tic Tac Toe. The winner is the first get three squares in a straight line.
-### if 17 < squares < 63 the game will be Connect 4. The winner is the first to get four squares in a straight line.
-### if squares >= 64 the game will be Othello (aka Reversi). The winner is the player with the most squares at the end of the game.
+! if total number of squares <= 16, the game will be Tic Tac Toe. The winner is the first get three squares in a straight line.
+! if 17 < squares < 63 the game will be Connect 4. The winner is the first to get four squares in a straight line.
+! if squares >= 64 the game will be Othello (aka Reversi). The winner is the player with the most squares at the end of the game.
 
 ## HTML
 The main HTML page contains the input boxes and the start button.
@@ -22,7 +22,7 @@ The CSS specifies the TOP and HEIGHT of each ROW, the LEFT and WIDTH of each COL
 ### Common to all
 Create a 2D object containing all rows, columns and values.
 Use loops to create an HTML string of the object, which is rendered in the DOM using JQuery.
-Use JQuery click event to select clicked in cell.
+Use JQuery click event to select clicked in cell. Count in 8 directions using loop and count until blank cell or opponents tile is detected.
 
 ### Tic Tac Toe
 Count to three in a straight line.
@@ -32,7 +32,7 @@ Drop the clicked in cell if there's empty cells beneath.
 Then count to four in a straight line
 
 ### Othello
-Flip any of your opponents tiles between the tile you just placed and your next tile in a stright line.
+Flip any of your opponents tiles between the tile you just placed and your next tile in a stright line. Count in 8 directions until one of your own tiles is found. Build an array of all tiles to be flipped.
 
 ## Things remaining
 AI for any / all games

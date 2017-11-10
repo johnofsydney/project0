@@ -127,6 +127,26 @@ let updateGameboard = function(row, column, value) {
 
 } // gameboard object is now updated.
 
+
+let countBlankCells = function () {
+let counter = 0;
+  for (let i = 0; i < rows.length; i++) {
+    for (let j = 0; j < columns.length; j++) {
+      let char = rows[i];
+      let num = columns[j].toString();
+
+      let strKey = char + num;
+      if (gameboard[strKey]['_value'] === "_null") {
+        counter = counter + 1
+      }
+    }
+  }
+
+  return counter
+}
+
+
+
 let checkForFlips = function(row, column, value) {
   let flipArr = []; // build an array of all cells to flip
   let tempArr = []; // temporary Array to save each check from being run more than once;
@@ -212,7 +232,7 @@ let checkForWin = function(row, column, value) {
           console.log(numRows, numColumns);
           render();
         })
-////////////////////////////////////////////////
+        ////////////////////////////////////////////////
 
         //
       } else {
@@ -225,7 +245,27 @@ let checkForWin = function(row, column, value) {
         })
       }
       console.log(`white wins: ${whiteWins}, black wins: ${blackWins}`);
+    } else {
+      console.log("no one has won yet");
+      console.log(countBlankCells());
+
+      if (countBlankCells() === 0) {
+        console.log("draw");
+
+        $('#announcement').html("DRAW").show().fadeOut(5000, function() {
+          createGameBoard(numRows, numColumns);
+          console.log(numRows, numColumns);
+          render();
+        })
+
+
+
+
+      }
+
     }
+
+
 
   } else if ((numRows * numColumns) > 63) { //Othello / reversi
 
@@ -652,7 +692,7 @@ let checkUpArr = function(row, column, value) {
   strNextKey = charPrevRow + column;
   let adjacentsToUpArr = [];
 
-  if (charRow <="B") {
+  if (charRow <= "B") {
     return []
   }
 
