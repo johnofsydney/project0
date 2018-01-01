@@ -1,5 +1,9 @@
 /*comments here*/
 
+body {
+  background-color: #aaa9e6;
+}
+
 
 #gamearea * {
   position: absolute;
@@ -15,11 +19,16 @@
 }
 
 #announcement2 {
-  width: 200px;
+  width: 300px;
 }
 
 h1, h2, h3 {
-  padding: 1px 10px
+  padding: 1px 10px;
+  font-family: 'VT323', monospace;
+}
+
+p {
+    font-family: 'arial', sans-serif;
 }
 
 button {
@@ -33,10 +42,6 @@ input {
 }
 /*rows*/
 
-body {
-  background-color: #aaa9e6;
-  font-family: 'VT323', monospace;
-}
 
 ._A {
   top: 100px;

@@ -24,7 +24,7 @@ let render = function() {
 $(document).ready(function() {
   console.log("screenstuff.js ready! OK use DOM");
 
-  let player1 = true;
+
 
 
 
@@ -44,13 +44,15 @@ $(document).ready(function() {
 
       if (player1) {
         updateGameboard(strRow, strColumn, "_black")
-        render();
         $('#player').html('Next turn: White').show()
+        render();
+
 
       } else {
         updateGameboard(strRow, strColumn, "_white")
-        render();
         $('#player').html('Next turn: Black').show()
+        render();
+
       }
     } else {
       console.log("Cant go in occupied square");

@@ -13,6 +13,7 @@ let charPrevRow = ""
 let strNextKey = "";
 let blackWins = 0;
 let whiteWins = 0;
+let player1 = true;
 ////////////////////////////////////////////////////////////////
 
 // take the gameboard object and create a DOM version of HTML to display it...
@@ -83,13 +84,22 @@ let createGameBoard = function(inputRows, inputColumns) {
     gameboard.E5._value = "_white";
     gameboard.D5._value = "_black";
     gameboard.E4._value = "_black";
+
+
+
   }
 
 }
 ///////////////////////////////////////////////////////////
+
+
+
+
 // to refer to a square >> (eg) gameboard.A2.row = "A"
 
 let updateGameboard = function(row, column, value) {
+
+
 
   if ((numRows * numColumns) < 17) { // TIC TAC TOE
     // TIC TAC TOE// TIC TAC TOE // TIC TAC TOE // TIC TAC TOE // TIC TAC TOE
@@ -102,17 +112,17 @@ let updateGameboard = function(row, column, value) {
     gameboard[strKey]['_value'] = value; // just place the pice where the player clicked
     console.log("about to send to checkForFlips with row = " + row + " column = " + column + " value = " + value);
 
-// if check for fliips === 0 send a message, change back to same player
-  if ((checkForFlips(row, column, value)) === 0) {
+    // if check for fliips === 0 send a message, change back to same player
+    if ((checkForFlips(row, column, value)) === 0) {
+      console.log(checkForFlips(row, column, value));
+      console.log("illegal move");
+      player1 = !player1  // this works, but still screen updates wrong.
+      gameboard[strKey]['_value'] = "_null"
+      $('#player').html('Illegal move. Try Again').show()  /// is overwritten by
+    }
     console.log(checkForFlips(row, column, value));
-    console.log("illegal move");
-    $('#announcement2').html("well, this is an illegal move, but variable scope prevents me from reversing the player at this stage").show()
-  }
-    console.log(checkForFlips(row, column, value));
 
-//
-
-
+    //
     checkForFlips(row, column, value)
     checkForWin(row, column, value)
 
@@ -138,24 +148,24 @@ let updateGameboard = function(row, column, value) {
   }
 
 
-} // gameboard object is now updated.
+  } // gameboard object is now updated.
 
 
-let countBlankCells = function () {
-let counter = 0;
-  for (let i = 0; i < rows.length; i++) {
-    for (let j = 0; j < columns.length; j++) {
-      let char = rows[i];
-      let num = columns[j].toString();
+  let countBlankCells = function() {
+    let counter = 0;
+    for (let i = 0; i < rows.length; i++) {
+      for (let j = 0; j < columns.length; j++) {
+        let char = rows[i];
+        let num = columns[j].toString();
 
-      let strKey = char + num;
-      if (gameboard[strKey]['_value'] === "_null") {
-        counter = counter + 1
+        let strKey = char + num;
+        if (gameboard[strKey]['_value'] === "_null") {
+          counter = counter + 1
+        }
       }
     }
-  }
 
-  return counter
+    return counter
 }
 
 
@@ -311,29 +321,28 @@ let checkForWin = function(row, column, value) {
       }
     }
 
-////
+    ////
+    else {
+      console.log("no one has won yet");
+      console.log(countBlankCells());
 
-else {
-  console.log("no one has won yet");
-  console.log(countBlankCells());
+      if (countBlankCells() === 0) {
+        console.log("draw");
 
-  if (countBlankCells() === 0) {
-    console.log("draw");
-
-    $('#announcement').html("DRAW").show().fadeOut(5000, function() {
-      createGameBoard(numRows, numColumns);
-      console.log(numRows, numColumns);
-      render();
-    })
-
+        $('#announcement').html("DRAW").show().fadeOut(5000, function() {
+          createGameBoard(numRows, numColumns);
+          console.log(numRows, numColumns);
+          render();
+        })
 
 
 
-  }
 
-}
+      }
 
-////
+    }
+
+    ////
 
 
 

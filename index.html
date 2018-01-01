@@ -28,7 +28,7 @@
   <button id="startButton">Start / Restart the Game</button>
   </div>
 
-  <h2 id="player"></h2>
+  <h2 id="player">Next turn: Black</h2>
 
   <div class="screeninfo">
   <h2>Scoreboard</h2>
@@ -46,7 +46,12 @@
   <h1 id="announcement"></h1>
 
 
-  <h1 id="announcement2"></h1>
+  <div id="announcement2">
+    <p><strong>If Number of squares < 17</strong> you will be playing tic tac toe. Winner is first to 3 in a row, yes, even if board is 3 x 4 or 4 x 4.</p>
+    <p><strong>If Number of squares > 17 and < 64</strong> you will be playing connect 4. Winner is first to 4 in a row.</p>
+    <p><strong>If Number of squares = 64</strong> you will be playing othello / reversi. Not all of the game logic was finished, so the app will not declare a winner. Also some illegal moves are not prevented, so please play nice :-).</p>
+    <p><strong>If Number of squares > 64</strong> the app will draw a gameboard, but it won't know what to do beyond that.</p>
+  </div>
 
 
 
