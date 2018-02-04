@@ -112,7 +112,7 @@ let updateGameboard = function(row, column, value) {
     gameboard[strKey]['_value'] = value; // just place the pice where the player clicked
     console.log("about to send to checkForFlips with row = " + row + " column = " + column + " value = " + value);
 
-    // if check for fliips === 0 send a message, change back to same player
+    // if check for flips === 0 send a message, change back to same player
     if ((checkForFlips(row, column, value)) === 0) {
       console.log(checkForFlips(row, column, value));
       console.log("illegal move");
